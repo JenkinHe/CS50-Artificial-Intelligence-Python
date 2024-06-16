@@ -78,4 +78,46 @@ class Maze():
             self.walls.append(row)
         
         self.solution=None
+
+
+def solve(self):
+    """ Finds a solution to maze, if one exists"""
+
+    # Keep track of number of states explored
+    self.num_explored=0
+
+    # initialise frontier to just the starting position
+    start= Node(state=self.start, parent=None,action=None)
+    frontier =StackFrontier()
+    frontier.add(start)
+
+    # Initialise an empty explored set
+    self.explored=set()
+
+    # Keep looping until solution found
+    while True:
+
+        # if nothing left in frontier then no path
+        if frontier.empty():
+            raise Exception("no solution")
         
+        node = frontier.remove()
+        self.num_explored+=1
+
+        if node.state == self.goal:
+            actions=[]
+            cells= []
+
+            # Follow parent nodes to find solution
+
+            while node.parent is not None:
+                actions.append(node.action)
+                cells.append(node.state)
+                node=node.parent
+            actions.reverse()
+            cells.reverse()
+            self.solution=(actions,cells)
+            return
+        
+        # mark node as explored
+        self.explored.add(node.state)
