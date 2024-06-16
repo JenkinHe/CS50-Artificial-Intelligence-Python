@@ -127,3 +127,4 @@ def solve(self):
             if not frontier.contains_state(state) and state not in self.explored:
                 child = Node(state=state,parent=node,action=action)
                 frontier.add(child)
+# this is just depth first graph traversal with back tracking to find the path
